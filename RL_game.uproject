@@ -22,6 +22,11 @@
 			"Name": "MindMaker",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/1ed5ba21261c476e9736488484b436ae"
+		},
+		{
+			"Name": "FileMan",
+			"Enabled": true,
+			"MarketplaceURL": "https://github.com/anhuntz/fileman"
 		}
 	]
 }
