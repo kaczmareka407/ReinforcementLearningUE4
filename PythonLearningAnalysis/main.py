@@ -21,21 +21,31 @@ def main():
         print(f'{key}: {value}')
     print('==========================')
 
-    plot_x = [x for x in range(len(data['trainingRewards']))]
-    plot_y = data['trainingRewards']
 
-    print(f'X len = {len(plot_x)}')
-    print(f'Y len = {len(plot_y)}')
+    print(f'Num training episodes = {len(data["trainingRewards"])}')
 
-    plt.plot(plot_y)
+    plt.plot(data['trainingRewards'], label='training reward')
     plt.xlabel('# episode')
     plt.ylabel('reward')
     plt.title(f'Accumulated reward in the following episodes \nLevel: {data["level"]} \nAlgorithm: {data["algorithm"]}')
     plt.grid(color = 'green', linestyle = '--')
 
-    #add point
-    plt.plot(5,5,'go')
 
+    #add evaluation line
+    eval_line = data['evalutationRewards']
+    highest_training_reward = data['trainingRewards'][-1]
+    eval_line = [x-highest_training_reward for x in eval_line]
+    plt.plot(eval_line, label='evaluation reward')
+
+    #add end_of_level locations
+    wins_points = data['wonEpisodes']
+    for x in wins_points:
+        if x < data["numLearning"]:
+            plt.plot(x,data["trainingRewards"][x],'bo')
+        else:
+            plt.plot(x-data["numLearning"],eval_line[x-data["numLearning"]],'rh')
+
+    plt.legend()
     plt.show()
 
 
